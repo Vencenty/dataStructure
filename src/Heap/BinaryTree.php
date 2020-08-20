@@ -110,6 +110,20 @@ class BinaryTree
         }
     }
 
+    /**
+     * 后序遍历 文件夹系统遍历
+     *
+     * @param $node
+     */
+    public function postOrderTraverse($node)
+    {
+        if ($node != null) {
+            $this->postOrderTraverse($node->left);
+            $this->postOrderTraverse($node->right);
+            dump($node->value);
+        }
+    }
+
 
     /**
      * 添加节点
@@ -123,8 +137,60 @@ class BinaryTree
     {
         return new Node($data, $left, $right);
     }
-}
 
+    /**
+     * 查找二叉树最小节点
+     *
+     * @param $node
+     * @return mixed
+     */
+    public function findMin($node)
+    {
+        while ($node && $node->left != null) {
+            $node = $node->left;
+        }
+
+        return $node->value;
+    }
+
+    /**
+     * 寻找最大数值
+     *
+     * @param $node
+     * @return mixed
+     */
+    public function findMax($node)
+    {
+        while ($node && $node->right != null) {
+            $node = $node->right;
+        }
+
+        return $node->value;
+    }
+
+    /**
+     * 二叉树节点查找
+     *
+     * @param $node
+     * @param $value
+     * @return bool
+     */
+    public function find($node, $value)
+    {
+        if ($node == null) {
+            return false;
+        }
+
+        if ($value > $node->value) {
+            return $this->find($node->right, $value);
+        } elseif ($value < $node->value) {
+            return $this->find($node->left, $value);
+        } else {
+            return true;
+        }
+    }
+
+}
 
 
 /**
@@ -158,3 +224,15 @@ $tree->insertNode(13);
 //$tree->inOrderTraverse($tree->root);
 // 前序遍历测试
 //$tree->preOrderTraverse($tree->root);
+// 后序遍历测试
+//$tree->postOrderTraverse($tree->root);
+
+// 查找最小值测试
+//$min = $tree->findMin($tree->root);
+//dd($min);
+// 查找最大值测试
+//$max = $tree->findMax($tree->root);
+//dd($max);
+
+$nodeExists = $tree->find($tree->root, 9);
+dd($nodeExists);
