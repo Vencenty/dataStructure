@@ -82,21 +82,70 @@ class BinaryTree
 
     }
 
+    /**
+     * 用于输出顺序排序
+     *
+     * @param $node
+     */
+    public function inOrderTraverse($node)
+    {
+        if ($node != null) {
+            $this->inOrderTraverse($node->left);
+            dump($node->value);
+            $this->inOrderTraverse($node->right);
+        }
+    }
+
+    /**
+     * 前序遍历,用于复制二叉树
+     *
+     * @param $node
+     */
+    public function preOrderTraverse($node)
+    {
+        if ($node != null) {
+            dump($node->value);
+            $this->preOrderTraverse($node->left);
+            $this->preOrderTraverse($node->right);
+        }
+    }
 
     public function createNode($data, $left = null, $right = null)
     {
         return new Node($data, $left, $right);
     }
 }
-// 1
-//  2
-//     8
-//   7
-//  4
+
+
+
+/**
+ * 二叉树结构图,参考慕课网课程
+ * https://www.imooc.com/video/15746
+ *
+ *                   8
+ *                 /    \
+ *              3        10
+ *            /   \        \
+ *         1       6       14
+ *               /  \     /
+ *              4    7   13
+ *
+ *
+ */
+
 $tree = new BinaryTree;
-$tree->insertNode(1);
-$tree->insertNode(2);
 $tree->insertNode(8);
-$tree->insertNode(7);
+$tree->insertNode(3);
+$tree->insertNode(10);
+$tree->insertNode(1);
+$tree->insertNode(6);
+$tree->insertNode(14);
 $tree->insertNode(4);
-dd($tree);
+$tree->insertNode(7);
+$tree->insertNode(13);
+//dd($tree->root);
+
+// 中序遍历测试
+//$tree->inOrderTraverse($tree->root);
+// 前序遍历测试
+//$tree->preOrderTraverse($tree->root);
