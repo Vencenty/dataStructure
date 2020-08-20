@@ -110,6 +110,15 @@ class BinaryTree
         }
     }
 
+
+    /**
+     * 添加节点
+     *
+     * @param $data
+     * @param null $left
+     * @param null $right
+     * @return Node
+     */
     public function createNode($data, $left = null, $right = null)
     {
         return new Node($data, $left, $right);
