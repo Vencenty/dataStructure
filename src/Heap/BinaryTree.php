@@ -44,7 +44,13 @@ class Node
 
 class BinaryTree
 {
+    /**
+     * 根节点
+     *
+     * @var
+     */
     public $root;
+
 
     public function insertNode($data)
     {
@@ -190,6 +196,53 @@ class BinaryTree
         }
     }
 
+    /**
+     * 二叉树删除节点
+     *
+     * @param $node
+     * @param $value
+     * @return null
+     */
+    public function removeNode($node, $value)
+    {
+        if ($node == null) {
+            return null;
+        }
+
+        if ($value > $node->value) {
+            $node->right = $this->removeNode($node->right, $value);
+            return $node;
+        } elseif ($value < $node->value) {
+            $node->left = $this->removeNode($node->left, $value);
+            return $node;
+        } else {
+            // 第一种情况,删除节点是叶子结点,没有左子树也没有右子树,直接删除掉即可
+            if ($node->left == null && $node->right == null) {
+                return null;
+            }
+
+
+            // 第二种情况,存在一个左节点或者右节点
+            if ($node->left == null) {
+                $node = $node->left;
+                return $node;
+            } elseif ($node->right == null) {
+                $node = $node->right;
+                return $node;
+            } else {
+                // 第三种情况, 左右节点都有孩子,那么要找到右节点的最小值,
+                //把他替换成当前要删除节点的值,然后把原节点删除掉
+
+                $minValue = $this->findMin($node->right);
+                $node->value = $minValue;
+                $node->right = $this->removeNode($node->right, $minValue);
+                return $node;
+            }
+
+
+        }
+    }
+
 }
 
 
@@ -202,8 +255,8 @@ class BinaryTree
  *              3        10
  *            /   \        \
  *         1       6       14
- *               /  \     /
- *              4    7   13
+ *               /  \     /  \
+ *              4    7   13   20
  *
  *
  */
@@ -218,6 +271,7 @@ $tree->insertNode(14);
 $tree->insertNode(4);
 $tree->insertNode(7);
 $tree->insertNode(13);
+$tree->insertNode(20);
 //dd($tree->root);
 
 // 中序遍历测试
@@ -234,5 +288,16 @@ $tree->insertNode(13);
 //$max = $tree->findMax($tree->root);
 //dd($max);
 
-$nodeExists = $tree->find($tree->root, 9);
-dd($nodeExists);
+// 查找节点
+//$nodeExists = $tree->find($tree->root, 9);
+//dd($nodeExists);
+
+// 删除节点测试
+//dump($tree->root);
+//$result = $tree->removeNode($tree->root, 1);
+//dd($result);
+
+//dump($tree->root);
+$result = $tree->removeNode($tree->root, 8);
+
+dump($result);
