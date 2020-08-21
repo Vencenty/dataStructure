@@ -224,10 +224,10 @@ class BinaryTree
 
             // 第二种情况,存在一个左节点或者右节点
             if ($node->left == null) {
-                $node = $node->left;
+                $node = $node->right;
                 return $node;
             } elseif ($node->right == null) {
-                $node = $node->right;
+                $node = $node->left;
                 return $node;
             } else {
                 // 第三种情况, 左右节点都有孩子,那么要找到右节点的最小值,
