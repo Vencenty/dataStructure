@@ -246,6 +246,7 @@ class BinaryTree
 }
 
 
+
 /**
  * 二叉树结构图,参考慕课网课程
  * https://www.imooc.com/video/15746
