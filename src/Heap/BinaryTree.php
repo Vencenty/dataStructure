@@ -51,7 +51,11 @@ class BinaryTree
      */
     public $root;
 
-
+    /**
+     * 插入数据节点
+     *
+     * @param $data
+     */
     public function insertNode($data)
     {
         $node = $this->createNode($data);
@@ -66,7 +70,8 @@ class BinaryTree
     /**
      * 插入左节点
      *
-     * @param $data
+     * @param Node $node
+     * @param Node $newNode
      */
     public function insert(Node $node, Node $newNode)
     {
