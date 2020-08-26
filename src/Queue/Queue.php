@@ -80,3 +80,4 @@ dump($queue->pop());
 dump($queue->pop());
 dump($queue->pop());
 dump($queue->length());
+dump("优秀");
